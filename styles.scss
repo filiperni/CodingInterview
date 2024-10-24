@@ -1,0 +1,188 @@
+$font-family: "Encode Sans", sans-serif;
+$heart-size: 15px;
+$heart-border-size: 3px;
+$heart-size: 15px;
+$heart-color: white;
+
+body {
+	font-family: $font-family;
+	max-width: 1670px;
+	margin: 0 auto;
+}
+
+// The container element for the custom checkbox
+.checkbox-container {
+	display: block;
+	position: relative;
+	padding-left: 25px;
+	// margin-bottom: 12px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	// Hide the browser's default checkbox
+	input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+	}
+
+	// Custom checkbox styling
+	.checkmark {
+		position: absolute;
+		top: 3.5px;
+		left: 0;
+		height: 17px;
+		width: 17px;
+		border: 3px solid black;
+		border-radius: 5px;
+
+		// Create the checkmark/indicator (hidden when not checked)
+		&:after {
+			content: "";
+			position: absolute;
+			display: none;
+		}
+
+		// Style the checkmark
+		&:after {
+			left: 5px;
+			top: -4px;
+			width: 7px;
+			height: 13px;
+			border: solid black;
+			border-width: 0 3px 3px 0;
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+		// Create the checkmark/indicator (hidden when not checked)
+		&:before {
+			content: "";
+			position: absolute;
+			display: none;
+		}
+
+		// Style the checkmark
+		&::before {
+			left: 8.5px;
+			top: -7.5px;
+			width: 7px;
+			height: 18px;
+			background-color: white;
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+	}
+}
+// Show the checkmark when the checkbox is checked
+input:checked ~ .checkmark:after {
+	display: block;
+}
+// Show the checkmark when the checkbox is checked
+input:checked ~ .checkmark::before {
+	display: block;
+}
+
+@mixin heart-style {
+	position: absolute;
+	width: $heart-size;
+	height: $heart-size;
+	border: $heart-border-size solid $heart-color;
+
+	border-top-color: transparent;
+	border-right-color: transparent;
+}
+
+.heart {
+	transform: rotate(-45deg);
+	@include heart-style;
+	&:before,
+	&:after {
+		content: "";
+		border-radius: 50%;
+		@include heart-style;
+	}
+	&:before {
+		top: -$heart-size/2;
+		left: -$heart-border-size;
+		transform: rotate(135deg);
+	}
+	&:after {
+		top: -$heart-border-size;
+		left: $heart-size/2 - $heart-border-size * 2;
+		transform: rotate(225deg);
+	}
+}
+@mixin filters-flex-settings {
+	@media (max-width: 845px) {
+		flex-direction: column;
+	}
+}
+
+.filters {
+	display: flex;
+	// flex-direction: row;
+	gap: 10px;
+	justify-content: space-between;
+	// max-width: 300px;
+	@include filters-flex-settings;
+
+	label {
+		margin-top: 6px;
+	}
+
+	input {
+		display: none;
+	}
+
+	select {
+		border: none;
+	}
+	#cityFilter {
+		width: 160px;
+	}
+	#sortPrice {
+		width: 140px;
+	}
+	.filters-left,
+	.filters-right {
+		display: flex;
+		// flex-direction: row;
+		gap: 10px;
+		@include filters-flex-settings;
+	}
+}
+
+.call-to-action-btn {
+	background-color: rgb(230, 230, 230);
+	// max-width: 300px;
+	width: 250px;
+	&:hover {
+		background-color: black;
+	}
+}
+
+.netto-price-number {
+	font-size: 25px;
+}
+
+.vehicle-card {
+	max-width: 390px;
+	min-width: 300px;
+	background: linear-gradient(
+		to bottom,
+		rgb(52, 52, 52) 0%,
+		rgb(151, 151, 151) 35%
+	);
+	margin: 0 10px 20px 10px;
+
+	p {
+		margin-bottom: 0px;
+	}
+}
